@@ -11,53 +11,81 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      body: Column(
-        children: [
-          Material(
-            elevation: 10,
-            child: Container(
-              // color: Colors.red,
-              width: double.infinity,
-              height: 120,
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 60,
-                  ),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 140,
-                      ),
-                      Text(
-                        "Pet Care",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.purple,
-                            fontSize: 30),
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      IconButton(
-                          onPressed: () {}, icon: Icon(Icons.favorite_border)),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      IconButton(
-                          onPressed: (() {
-                            // cart button
-                          }),
-                          icon: Icon(Icons.shopping_cart))
-                    ],
-                  )
-                ],
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.purple,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              enableFeedback: false,
+              onPressed: () {
+                // setState(() {
+                //   pageIndex = 0;
+                // });
+              },
+              icon: Icon(
+                Icons.home_outlined,
+                color: Colors.white,
+                size: 35,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Material(
+              elevation: 10,
+              child: Container(
+                // color: Colors.red,
+                width: double.infinity,
+                height: 120,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 60,
+                    ),
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 140,
+                        ),
+                        Text(
+                          "Pet Care",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.purple,
+                              fontSize: 30),
+                        ),
+                        SizedBox(
+                          width: 40,
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.favorite_border)),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        IconButton(
+                            onPressed: (() {
+                              // cart button
+                            }),
+                            icon: Icon(Icons.shopping_cart))
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
