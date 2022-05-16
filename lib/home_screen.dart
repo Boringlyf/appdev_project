@@ -13,56 +13,43 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       bottomNavigationBar: BottomNavigationWidget(),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        flexibleSpace: SizedBox(
+          height: 50,
+        ),
+        backgroundColor: Colors.white,
+        leading: Column(
           children: [
-            Material(
-              elevation: 10,
-              child: Container(
-                // color: Colors.red,
-                width: double.infinity,
-                height: 120,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      height: 60,
-                    ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 140,
-                        ),
-                        Text(
-                          "Pet Care",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.purple,
-                              fontSize: 30),
-                        ),
-                        SizedBox(
-                          width: 40,
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.favorite_border)),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        IconButton(
-                            onPressed: (() {
-                              // cart button
-                            }),
-                            icon: Icon(Icons.shopping_cart))
-                      ],
-                    )
-                  ],
-                ),
-              ),
+            SizedBox(
+              height: 30,
+            ),
+            Icon(
+              Icons.menu,
+              color: Colors.purple,
             ),
           ],
+        ),
+        title: Column(
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Pet Care",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.purple,
+                  fontSize: 30),
+            ),
+          ],
+        ),
+        bottom: PreferredSize(
+          child: SizedBox(
+            height: 20,
+          ),
+          preferredSize: Size.fromHeight(60),
         ),
       ),
     );
@@ -70,25 +57,55 @@ class HomeScreen extends StatelessWidget {
 }
 
 
-// Row(
+// body: SingleChildScrollView(
+//         scrollDirection: Axis.vertical,
+//         child: Column(
+//           children: [
+//             Material(
+//               elevation: 10,
+//               child: Container(
+//                 // color: Colors.red,
+//                 width: double.infinity,
+//                 height: 120,
+//                 child: Column(
 //                   children: [
-//                     Padding(
-//                       padding: const EdgeInsets.symmetric(
-//                           vertical: 20, horizontal: 10),
-//                       child: Container(
-//                       Color.fromRGBO(244, 67, 54, 1)RGBO(244, 67, 54, 1)00,
-//                         height: 100,
-//                         color: Colors.red,
-//                       ),
+//                     SizedBox(
+//                       width: double.infinity,
+//                       height: 60,
 //                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.symmetric(
-//                           vertical: 20, horizontal: 10),
-//                       child: Container(
-//                         width: 200,
-//                         height: 100,
-//                         color: Colors.red,
-//                       ),
-//                     ),
+//                     Row(
+//                       // mainAxisAlignment: MainAxisAlignment.center,
+//                       children: [
+//                         SizedBox(
+//                           width: 140,
+//                         ),
+//                         Text(
+//                           "Pet Care",
+//                           style: TextStyle(
+//                               fontWeight: FontWeight.bold,
+//                               color: Colors.purple,
+//                               fontSize: 30),
+//                         ),
+//                         SizedBox(
+//                           width: 40,
+//                         ),
+//                         IconButton(
+//                             onPressed: () {},
+//                             icon: Icon(Icons.favorite_border)),
+//                         SizedBox(
+//                           width: 10,
+//                         ),
+//                         IconButton(
+//                             onPressed: (() {
+//                               // cart button
+//                             }),
+//                             icon: Icon(Icons.shopping_cart))
+//                       ],
+//                     )
 //                   ],
-//                 )
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
