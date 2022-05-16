@@ -10,12 +10,12 @@ class BottomNavigationWidget extends StatefulWidget {
 class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   int pageIndex = 0;
 
-  final pages = [
-    const Page1(),
-    const Page2(),
-    const Page3(),
-    const Page4(),
-  ];
+  // final pages = [
+  //   const Page1(),
+  //   const Page2(),
+  //   const Page3(),
+  //   const Page4(),
+  // ];
 
   @override
   Widget build(BuildContext context) {

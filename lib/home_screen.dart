@@ -1,6 +1,7 @@
 import 'package:appdev_project/cart_screen.dart';
 import 'package:appdev_project/models/ads_model.dart';
 import 'package:appdev_project/widgets/ads_widget.dart';
+import 'package:appdev_project/widgets/bottom_navigation_widget.dart';
 import 'package:appdev_project/widgets/headerOfPage.dart';
 import 'package:flutter/material.dart';
 
@@ -11,30 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          color: Colors.purple,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              enableFeedback: false,
-              onPressed: () {
-                // setState(() {
-                //   pageIndex = 0;
-                // });
-              },
-              icon: Icon(
-                Icons.home_outlined,
-                color: Colors.white,
-                size: 35,
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomNavigationWidget(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
