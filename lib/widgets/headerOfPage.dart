@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../cart_screen.dart';
+// import '../cart_screen.dart';
 
 class HeaderOfPage extends StatelessWidget {
   const HeaderOfPage({Key? key}) : super(key: key);
@@ -32,11 +32,11 @@ class HeaderOfPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: ((context) => CartScreen()),
-                ),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: ((context) => CartScreen()),
+              //   ),
+              // );
             },
             icon: Icon(Icons.shopping_basket_outlined),
           ),

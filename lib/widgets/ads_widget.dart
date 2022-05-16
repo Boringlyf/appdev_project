@@ -7,25 +7,25 @@ class AdsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final adsData = Provider.of<AdsProvider>(context);
-    final ads = adsData.ads;
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      itemCount: 3,
-      itemBuilder: ((context, index) {
-        return Padding(
-          padding: EdgeInsets.symmetric(vertical: 15),
-          child: Container(
-            width: 200,
-            height: 100,
-            child: Card(
-              elevation: 10,
-              child: Image.network(ads[index].imageUrl),
-            ),
-          ),
-        );
-      }),
+    final ad_prov = Provider.of<AdsProvider>(context);
+    final adverts = ad_prov.ads;
+    return Container(
+      height: 200,
+      width: double.infinity,
+      color: Colors.red,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: adverts.length,
+        itemBuilder: ((context, index) => Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Card(child: Image.network(adverts[index].imageUrl)),
+                  )),
+            )),
+      ),
     );
   }
 }

@@ -1,18 +1,100 @@
-import 'package:appdev_project/cart_screen.dart';
+import 'package:appdev_project/Screens/cart_screen.dart';
+import 'package:appdev_project/Screens/explore_screen.dart';
 import 'package:appdev_project/models/ads_model.dart';
 import 'package:appdev_project/widgets/ads_widget.dart';
-import 'package:appdev_project/widgets/bottom_navigation_widget.dart';
 import 'package:appdev_project/widgets/headerOfPage.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'Screens/homepage_screen.dart';
+
+class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int pageIndex = 0;
+
+  final pages = [
+    HomepageScreen(),
+    CartScreen(),
+    ExploreScreen(),
+    // const Page4(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      bottomNavigationBar: BottomNavigationWidget(),
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.purple,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+                onPressed: () {
+                  pageIndex = 0;
+                  setState(() {});
+                },
+                icon: pageIndex == 0
+                    ? Icon(
+                        Icons.home,
+                        color: Colors.grey[200],
+                        size: 35,
+                      )
+                    : Icon(
+                        Icons.home_outlined,
+                        color: Colors.grey[200],
+                        size: 35,
+                      )),
+            IconButton(
+                onPressed: () {
+                  pageIndex = 1;
+                  setState(() {});
+                },
+                icon: pageIndex == 1
+                    ? Icon(
+                        Icons.shopping_cart,
+                        color: Colors.grey[200],
+                        size: 35,
+                      )
+                    : Icon(
+                        Icons.shopping_cart_outlined,
+                        color: Colors.grey[200],
+                        size: 35,
+                      )),
+            IconButton(
+              onPressed: () {
+                pageIndex = 2;
+                setState(() {});
+              },
+              icon: pageIndex == 2
+                  ? Icon(
+                      Icons.explore,
+                      color: Colors.grey[200],
+                      size: 35,
+                    )
+                  : Icon(
+                      Icons.explore_outlined,
+                      color: Colors.grey[200],
+                      size: 35,
+                    ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.person_outline,
+                color: Colors.white,
+                size: 35,
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -52,6 +134,7 @@ class HomeScreen extends StatelessWidget {
           preferredSize: Size.fromHeight(60),
         ),
       ),
+      body: pages[pageIndex],
     );
   }
 }
