@@ -1,6 +1,7 @@
 import 'package:appdev_project/cart_screen.dart';
 import 'package:appdev_project/models/ads_model.dart';
 import 'package:appdev_project/widgets/ads_widget.dart';
+import 'package:appdev_project/widgets/bottom_navigation_widget.dart';
 import 'package:appdev_project/widgets/headerOfPage.dart';
 import 'package:flutter/material.dart';
 
@@ -11,80 +12,44 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          color: Colors.purple,
+      bottomNavigationBar: BottomNavigationWidget(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        flexibleSpace: SizedBox(
+          height: 50,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        backgroundColor: Colors.white,
+        leading: Column(
           children: [
-            IconButton(
-              enableFeedback: false,
-              onPressed: () {
-                // setState(() {
-                //   pageIndex = 0;
-                // });
-              },
-              icon: Icon(
-                Icons.home_outlined,
-                color: Colors.white,
-                size: 35,
-              ),
+            SizedBox(
+              height: 30,
+            ),
+            Icon(
+              Icons.menu,
+              color: Colors.purple,
             ),
           ],
         ),
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
+        title: Column(
           children: [
-            Material(
-              elevation: 10,
-              child: Container(
-                // color: Colors.red,
-                width: double.infinity,
-                height: 120,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      height: 60,
-                    ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 140,
-                        ),
-                        Text(
-                          "Pet Care",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.purple,
-                              fontSize: 30),
-                        ),
-                        SizedBox(
-                          width: 40,
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.favorite_border)),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        IconButton(
-                            onPressed: (() {
-                              // cart button
-                            }),
-                            icon: Icon(Icons.shopping_cart))
-                      ],
-                    )
-                  ],
-                ),
-              ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Pet Care",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.purple,
+                  fontSize: 30),
             ),
           ],
+        ),
+        bottom: PreferredSize(
+          child: SizedBox(
+            height: 20,
+          ),
+          preferredSize: Size.fromHeight(60),
         ),
       ),
     );
@@ -92,25 +57,55 @@ class HomeScreen extends StatelessWidget {
 }
 
 
-// Row(
+// body: SingleChildScrollView(
+//         scrollDirection: Axis.vertical,
+//         child: Column(
+//           children: [
+//             Material(
+//               elevation: 10,
+//               child: Container(
+//                 // color: Colors.red,
+//                 width: double.infinity,
+//                 height: 120,
+//                 child: Column(
 //                   children: [
-//                     Padding(
-//                       padding: const EdgeInsets.symmetric(
-//                           vertical: 20, horizontal: 10),
-//                       child: Container(
-//                       Color.fromRGBO(244, 67, 54, 1)RGBO(244, 67, 54, 1)00,
-//                         height: 100,
-//                         color: Colors.red,
-//                       ),
+//                     SizedBox(
+//                       width: double.infinity,
+//                       height: 60,
 //                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.symmetric(
-//                           vertical: 20, horizontal: 10),
-//                       child: Container(
-//                         width: 200,
-//                         height: 100,
-//                         color: Colors.red,
-//                       ),
-//                     ),
+//                     Row(
+//                       // mainAxisAlignment: MainAxisAlignment.center,
+//                       children: [
+//                         SizedBox(
+//                           width: 140,
+//                         ),
+//                         Text(
+//                           "Pet Care",
+//                           style: TextStyle(
+//                               fontWeight: FontWeight.bold,
+//                               color: Colors.purple,
+//                               fontSize: 30),
+//                         ),
+//                         SizedBox(
+//                           width: 40,
+//                         ),
+//                         IconButton(
+//                             onPressed: () {},
+//                             icon: Icon(Icons.favorite_border)),
+//                         SizedBox(
+//                           width: 10,
+//                         ),
+//                         IconButton(
+//                             onPressed: (() {
+//                               // cart button
+//                             }),
+//                             icon: Icon(Icons.shopping_cart))
+//                       ],
+//                     )
 //                   ],
-//                 )
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
