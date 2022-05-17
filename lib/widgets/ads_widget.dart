@@ -14,6 +14,7 @@ class AdsWidget extends StatelessWidget {
       width: double.infinity,
       color: Colors.red,
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: adverts.length,
         itemBuilder: ((context, index) => Padding(
