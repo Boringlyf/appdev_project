@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
           preferredSize: Size.fromHeight(60),
         ),
       ),
-      body: pages[pageIndex],
+      body: pages[pageIndex], //toggle through bottom Navigation bar
     );
   }
 }

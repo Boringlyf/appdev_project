@@ -12,7 +12,7 @@ class AdsWidget extends StatelessWidget {
     return Container(
       height: 200,
       width: double.infinity,
-      color: Colors.red,
+      // color: Colors.red,
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,

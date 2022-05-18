@@ -1,4 +1,9 @@
+import 'package:appdev_project/Screens/food_product_screen.dart';
+import 'package:appdev_project/Screens/vet_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../Screens/adopt_page.dart';
+import '../Screens/gadget_page.dart';
 
 class CatergoriesWidget extends StatelessWidget {
   const CatergoriesWidget({super.key});
@@ -8,7 +13,7 @@ class CatergoriesWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 150,
-      color: Colors.green,
+      // color: Colors.green, color used for alignment
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -31,8 +36,8 @@ class CatergoriesWidget extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            height: 100,
-            color: Colors.yellow,
+            height: 110,
+            // color: Colors.yellow,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -41,10 +46,16 @@ class CatergoriesWidget extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     child: InkWell(
                       enableFeedback: false,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (ctx) => FoodProductScreen()),
+                        );
+                      },
+                      //food
                       child: Card(
                         color: Colors.purple[300],
-                        elevation: 10,
+                        elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
@@ -72,13 +83,17 @@ class CatergoriesWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  //vet
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => VetScreen())));
+                      },
                       child: Card(
                         color: Colors.purple[300],
-                        elevation: 10,
+                        elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
@@ -106,13 +121,18 @@ class CatergoriesWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  //Gadgets
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => GadgetsPage()),
+                        ));
+                      },
                       child: Card(
                         color: Colors.purple[300],
-                        elevation: 10,
+                        elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
@@ -140,13 +160,18 @@ class CatergoriesWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  //Adopt
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AdoptPage(),
+                        ));
+                      },
                       child: Card(
                         color: Colors.purple[300],
-                        elevation: 10,
+                        elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
