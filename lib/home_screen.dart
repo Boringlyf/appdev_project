@@ -1,9 +1,13 @@
+import 'package:appdev_project/Screens/cart_page.dart';
 import 'package:appdev_project/Screens/cart_screen.dart';
 import 'package:appdev_project/Screens/explore_screen.dart';
 import 'package:appdev_project/models/ads_model.dart';
+import 'package:appdev_project/provider/cart_provider.dart';
 import 'package:appdev_project/widgets/ads_widget.dart';
+import 'package:appdev_project/widgets/badge.dart';
 import 'package:appdev_project/widgets/headerOfPage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'Screens/homepage_screen.dart';
 
@@ -19,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final pages = [
     HomepageScreen(),
-    CartScreen(),
+    CartPage(),
     ExploreScreen(),
     // const Page4(),
   ];
@@ -32,108 +36,72 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           color: Colors.purple,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-                onPressed: () {
-                  pageIndex = 0;
-                  setState(() {});
-                },
-                icon: pageIndex == 0
-                    ? Icon(
-                        Icons.home,
-                        color: Colors.grey[200],
-                        size: 35,
-                      )
-                    : Icon(
-                        Icons.home_outlined,
-                        color: Colors.grey[200],
-                        size: 35,
-                      )),
-            IconButton(
-                onPressed: () {
-                  pageIndex = 1;
-                  setState(() {});
-                },
-                icon: pageIndex == 1
-                    ? Icon(
-                        Icons.shopping_cart,
-                        color: Colors.grey[200],
-                        size: 35,
-                      )
-                    : Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.grey[200],
-                        size: 35,
-                      )),
-            IconButton(
-              onPressed: () {
-                pageIndex = 2;
-                setState(() {});
-              },
-              icon: pageIndex == 2
-                  ? Icon(
-                      Icons.explore,
-                      color: Colors.grey[200],
-                      size: 35,
-                    )
-                  : Icon(
-                      Icons.explore_outlined,
-                      color: Colors.grey[200],
-                      size: 35,
-                    ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.person_outline,
-                color: Colors.white,
-                size: 35,
+        child: Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    pageIndex = 0;
+                    setState(() {});
+                  },
+                  icon: pageIndex == 0
+                      ? Icon(
+                          Icons.home,
+                          color: Colors.grey[200],
+                          size: 35,
+                        )
+                      : Icon(
+                          Icons.home_outlined,
+                          color: Colors.grey[200],
+                          size: 30,
+                        )),
+              Consumer<CartProvider>(
+                builder: (_, cart, child) => Badge(
+                  value: cart.itemCount.toString(),
+                  child: IconButton(
+                      onPressed: () {
+                        pageIndex = 1;
+                        setState(() {});
+                      },
+                      icon: pageIndex == 1
+                          ? Icon(
+                              Icons.shopping_cart,
+                              color: Color.fromRGBO(238, 238, 238, 1),
+                              size: 35,
+                            )
+                          : Icon(
+                              Icons.shopping_cart_outlined,
+                              color: Colors.grey[200],
+                              size: 30,
+                            )),
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        flexibleSpace: SizedBox(
-          height: 50,
-        ),
-        backgroundColor: Colors.white,
-        leading: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            Icon(
-              Icons.menu,
-              color: Colors.purple,
-            ),
-          ],
-        ),
-        title: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            Text(
-              "Pet Care",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple,
-                  fontSize: 30),
-            ),
-          ],
-        ),
-        bottom: PreferredSize(
-          child: SizedBox(
-            height: 20,
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.person_outline,
+                  color: Colors.white,
+                  size: 35,
+                ),
+              ),
+            ],
           ),
-          preferredSize: Size.fromHeight(60),
         ),
       ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+          title: Text(
+            "Pet Care",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+          ),
+        ),
+      ),
+      drawer: Drawer(),
       body: pages[pageIndex], //toggle through bottom Navigation bar
     );
   }

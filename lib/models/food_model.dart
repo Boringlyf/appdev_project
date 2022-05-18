@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
+// import 'package:provider/provider.dart';
 
-class FoodModel {
+class FoodModel with ChangeNotifier {
   final String id;
   final String name;
   final String description;
-  final String price;
+  final double price;
   final String imgUrl;
 
   bool isfavorite;
@@ -16,4 +17,9 @@ class FoodModel {
       this.id = '',
       required this.price,
       this.isfavorite = false});
+
+  void toggleFavoriteStatus() {
+    isfavorite = !isfavorite;
+    notifyListeners();
+  }
 }

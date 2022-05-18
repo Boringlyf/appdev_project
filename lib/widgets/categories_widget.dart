@@ -1,6 +1,7 @@
 import 'package:appdev_project/Screens/food_product_screen.dart';
 import 'package:appdev_project/Screens/vet_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Screens/adopt_page.dart';
 import '../Screens/gadget_page.dart';
@@ -198,7 +199,7 @@ class CatergoriesWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
