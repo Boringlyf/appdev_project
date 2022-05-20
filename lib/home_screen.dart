@@ -1,10 +1,11 @@
 import 'package:appdev_project/Screens/cart_page.dart';
 import 'package:appdev_project/Screens/cart_screen.dart';
-import 'package:appdev_project/Screens/explore_screen.dart';
+// import 'package:appdev_project/Screens/explore_screen.dart';
 import 'package:appdev_project/models/ads_model.dart';
 import 'package:appdev_project/provider/cart_provider.dart';
 import 'package:appdev_project/widgets/ads_widget.dart';
 import 'package:appdev_project/widgets/badge.dart';
+import 'package:appdev_project/widgets/drawer_widget.dart';
 import 'package:appdev_project/widgets/headerOfPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final pages = [
     HomepageScreen(),
     CartPage(),
-    ExploreScreen(),
+    // ExploreScreen(),
     // const Page4(),
   ];
   @override
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      drawer: Drawer(),
+      drawer: DrawerWidget(),
       body: pages[pageIndex], //toggle through bottom Navigation bar
     );
   }

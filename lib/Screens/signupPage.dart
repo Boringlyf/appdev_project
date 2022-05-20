@@ -1,44 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './loginPage.dart';
+import './signupPage2.dart';
 
-import '../models/user_model.dart';
-
-class ChangePassword extends StatefulWidget {
-  const ChangePassword({Key? key}) : super(key: key);
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
 
   @override
-  _ChangePasswordState createState() => _ChangePasswordState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _ChangePasswordState extends State<ChangePassword> {
-  final _auth = FirebaseAuth.instance;
-
-  final OPassword_controller = TextEditingController();
-  final Password_controller = TextEditingController();
+class _SignupPageState extends State<SignupPage> {
+  final email_controller = TextEditingController();
+  final password_controller = TextEditingController();
   final CPassword_controller = TextEditingController();
+
   final _formkey = GlobalKey<FormState>();
   @override
   void dispose() {
-    OPassword_controller.dispose();
-    Password_controller.dispose();
+    email_controller.dispose();
+    password_controller.dispose();
     CPassword_controller.dispose();
     super.dispose();
-  }
-
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedinuser = UserModel();
-  void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      this.loggedinuser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
   }
 
   @override
@@ -46,32 +28,33 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Form(
       key: _formkey,
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Password Recovery"),
-          ),
-          body: SingleChildScrollView(
-            child: Center(
-                child: Column(
+        appBar: AppBar(
+          title: const Text("Signup"),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(
-                  height: 50,
-                ),
                 const Text(
-                  "Change Password",
+                  "Register Your Account",
                   textScaleFactor: 2,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 10,
+                ),
+                const Text(
+                    "Complete the following details to register yourself"),
+                const SizedBox(
+                  height: 40,
                 ),
                 TextFormField(
-                    obscureText: true,
                     decoration: InputDecoration(
-                      icon: const Icon(Icons.lock),
-                      labelText: "Old Password",
-                      hintText: "Enter Your Old Password",
+                      icon: const Icon(Icons.email),
+                      labelText: "Email",
+                      hintText: "Enter Your Email",
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 42, vertical: 20),
@@ -83,15 +66,16 @@ class _ChangePasswordState extends State<ChangePassword> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Old Your Password";
+                        return "Please Enter Your Email";
                       }
-                      if (validatePassword() == false) {
-                        return "Incorrect Password";
+                      if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                          .hasMatch(value)) {
+                        return "Please Enter a valid email";
                       }
                       return null;
                     },
                     onChanged: (text) {
-                      OPassword_controller.text = text;
+                      email_controller.text = text;
                     }),
                 const SizedBox(
                   height: 30,
@@ -101,7 +85,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     decoration: InputDecoration(
                       icon: const Icon(Icons.lock),
                       labelText: "Password",
-                      hintText: "Enter Your new Password",
+                      hintText: "Enter Your Password",
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 42, vertical: 20),
@@ -114,15 +98,15 @@ class _ChangePasswordState extends State<ChangePassword> {
                     validator: (value) {
                       RegExp regex = new RegExp(r'^.{6,}$');
                       if (value!.isEmpty) {
-                        return "Please Enter Your new Password";
+                        return "Please Enter Your Password";
                       }
                       if (!regex.hasMatch(value)) {
-                        return "Please Enter Valid Password(Min. 6 Character";
+                        return "Please Enter Valid Password(Min. 6 Character)";
                       }
                       return null;
                     },
                     onChanged: (text) {
-                      Password_controller.text = text;
+                      password_controller.text = text;
                     }),
                 const SizedBox(
                   height: 30,
@@ -130,28 +114,30 @@ class _ChangePasswordState extends State<ChangePassword> {
                 TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
-                        icon: const Icon(Icons.lock),
-                        labelText: "Confirm Password",
-                        hintText: "Confirm Your new Password",
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 42, vertical: 20),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(28),
-                          borderSide: const BorderSide(color: Colors.black12),
-                          gapPadding: 10,
-                        )),
+                      icon: const Icon(Icons.lock),
+                      labelText: "Confirm Password",
+                      hintText: "Confirm Your Password",
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 42, vertical: 20),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(28),
+                        borderSide: const BorderSide(color: Colors.black12),
+                        gapPadding: 10,
+                      ),
+                    ),
                     validator: (value) {
                       RegExp regex = new RegExp(r'^.{6,}$');
                       if (value!.isEmpty) {
-                        return "Please confirm Your Password";
-                      }
-                      if (Password_controller.text !=
-                          CPassword_controller.text) {
-                        return "Passwords don't match";
+                        return "Please Confirm Your Password";
                       }
                       if (!regex.hasMatch(value)) {
                         return "Please Enter Valid Password(Min. 6 Character";
+                      }
+
+                      if (password_controller.text !=
+                          CPassword_controller.text) {
+                        return "Passwords don't match";
                       }
                       return null;
                     },
@@ -159,46 +145,54 @@ class _ChangePasswordState extends State<ChangePassword> {
                       CPassword_controller.text = text;
                     }),
                 const SizedBox(
-                  height: 30,
+                  height: 40,
                 ),
                 SizedBox(
                   width: 200,
                   child: ElevatedButton(
-                      child: const Text("Submit"),
+                      child: const Text("Continue"),
                       onPressed: () {
                         setState(() {
                           if (_formkey.currentState!.validate()) {
-                            user!.updatePassword(
-                                Password_controller.text.trim());
-
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginPage()),
+                                  builder: (context) => SignupPage2(
+                                      email: email_controller.text.trim(),
+                                      password:
+                                          password_controller.text.trim())),
                             );
                           }
                         });
                       }),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Already have an account? "),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
+                        );
+                      },
+                      child: const Text("Login", textScaleFactor: 1.2),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
               ],
-            )),
-          )),
+            ),
+          ),
+        ),
+      ),
     );
-  }
-
-  Future<bool> validatePassword() async {
-    var firebaseUser = await _auth.currentUser;
-
-    var authCredentials = EmailAuthProvider.credential(
-        email: firebaseUser!.email.toString(),
-        password: OPassword_controller.text.trim());
-    try {
-      var authResult =
-          await firebaseUser.reauthenticateWithCredential(authCredentials);
-      return authResult.user != null;
-    } catch (e) {
-      print(e);
-      return false;
-    }
   }
 }

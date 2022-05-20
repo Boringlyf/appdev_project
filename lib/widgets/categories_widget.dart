@@ -43,6 +43,7 @@ class CatergoriesWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
+                  //food
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     child: InkWell(
@@ -53,7 +54,6 @@ class CatergoriesWidget extends StatelessWidget {
                               builder: (ctx) => FoodProductScreen()),
                         );
                       },
-                      //food
                       child: Card(
                         color: Colors.purple[300],
                         elevation: 5,

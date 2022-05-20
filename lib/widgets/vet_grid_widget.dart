@@ -1,24 +1,23 @@
-import 'package:appdev_project/models/food_model.dart';
-import 'package:appdev_project/provider/food_provider.dart';
+import 'package:appdev_project/widgets/vet_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './food_item.dart';
+import '../provider/vet_provider.dart';
 
-class FoodGridWidget extends StatelessWidget {
+class VetGridWidget extends StatelessWidget {
   final bool showOnlyFavorites;
-  FoodGridWidget(
+  VetGridWidget(
     this.showOnlyFavorites,
   );
 
   @override
   Widget build(BuildContext context) {
-    final food_provider = Provider.of<FoodProvider>(context);
-    final food =
-        showOnlyFavorites ? food_provider.favoriteFoods : food_provider.foods;
+    final vet_provider = Provider.of<VetProvider>(context);
+    final vet =
+        showOnlyFavorites ? vet_provider.favoriteVets : vet_provider.vets;
     return GridView.builder(
         padding: const EdgeInsets.all(10.0),
-        itemCount: food.length,
+        itemCount: vet.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 4 / 4,
@@ -26,8 +25,8 @@ class FoodGridWidget extends StatelessWidget {
             mainAxisSpacing: 30.0),
         itemBuilder: ((context, index) {
           return ChangeNotifierProvider.value(
-            value: food[index],
-            child: FoodItem(),
+            value: vet[index],
+            child: VetItem(),
           );
         }));
   }

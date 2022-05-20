@@ -1,3 +1,5 @@
+import 'package:appdev_project/provider/order_provider.dart';
+import 'package:appdev_project/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +25,7 @@ class CartScreen extends StatelessWidget {
           ),
         ),
       ),
-      drawer: Drawer(),
+      drawer: DrawerWidget(),
       body: Column(
         children: [
           Card(
@@ -44,12 +46,19 @@ class CartScreen extends StatelessWidget {
                   Spacer(),
                   Chip(
                     label: Text(
-                      '\$${cart_listener.totalAmount}',
+                      '\$${cart_listener.totalAmount.toStringAsFixed(2)}',
                     ),
                     backgroundColor: Colors.white,
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        final order_listener =
+                            Provider.of<OrderProvider>(context, listen: false);
+                        order_listener.addOrder(
+                            cart_listener.cartItems.values.toList(),
+                            cart_listener.totalAmount);
+                        cart_listener.clearCart();
+                      },
                       child: Text(
                         'ORDER NOW',
                         style: TextStyle(color: Colors.white),
@@ -66,6 +75,7 @@ class CartScreen extends StatelessWidget {
               itemCount: cart_listener.itemCount,
               itemBuilder: (context, index) => CartItemWidget(
                   cart_listener.cartItems.values.toList()[index].id,
+                  cart_listener.cartItems.keys.toList()[index],
                   cart_listener.cartItems.values.toList()[index].price,
                   cart_listener.cartItems.values.toList()[index].quantity,
                   cart_listener.cartItems.values.toList()[index].id),

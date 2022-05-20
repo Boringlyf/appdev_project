@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_signup/Forgot_Password.dart';
-import 'package:login_signup/profile_page.dart';
-import 'package:login_signup/SignupPage.dart';
-import 'package:login_signup/google_signin.dart';
+import './Forgot_Password.dart';
+import './profile_page.dart';
+import './signupPage.dart';
+import './google_signin.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -206,13 +206,7 @@ class _LoginPageState extends State<LoginPage> {
           MaterialPageRoute(builder: (context) => const ProfilePage()),
         ).catchError((error) {
           final snackBar = SnackBar(
-            content: Text("yes"),
-            action: SnackBarAction(
-              label: 'Undo',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
+            content: Text(error.toString()),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         });

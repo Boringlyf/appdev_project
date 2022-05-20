@@ -1,16 +1,17 @@
-import 'package:appdev_project/provider/food_provider.dart';
-import 'package:appdev_project/widgets/drawer_widget.dart';
+import 'package:appdev_project/provider/gadgets_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FoodDetailScreen extends StatelessWidget {
+import '../widgets/drawer_widget.dart';
+
+class GadgetDetailScreen extends StatelessWidget {
   final String id;
-  FoodDetailScreen({required this.id, super.key});
+  GadgetDetailScreen({required this.id, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final loaded_food =
-        Provider.of<FoodProvider>(context, listen: false).findById(id);
+    final loaded_gadgets =
+        Provider.of<GadgetsProvider>(context, listen: false).findById(id);
     return Scaffold(
       drawer: DrawerWidget(),
       appBar: PreferredSize(
@@ -19,7 +20,7 @@ class FoodDetailScreen extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.purple,
           title: Text(
-            loaded_food.name,
+            loaded_gadgets.title,
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
           ),
@@ -29,19 +30,19 @@ class FoodDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: 'foodPhoto',
+              tag: 'petPhoto',
               child: Container(
                   width: double.infinity,
                   height: 300,
                   child: Image.network(
-                    loaded_food.imgUrl,
+                    loaded_gadgets.imgUrl,
                   )),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              '\$${loaded_food.price}',
+              '\$${loaded_gadgets.price}',
               style: TextStyle(
                   color: Color.fromARGB(255, 36, 36, 36), fontSize: 20),
             ),
@@ -52,7 +53,7 @@ class FoodDetailScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
               child: Text(
-                loaded_food.description,
+                loaded_gadgets.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20),
                 softWrap: true,
@@ -64,9 +65,3 @@ class FoodDetailScreen extends StatelessWidget {
     );
   }
 }
-
-// AppBar(
-//         centerTitle: true,
-//         backgroundColor: Colors.purple,
-//         title: Text(loaded_food.name),
-//       ),

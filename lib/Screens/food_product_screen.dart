@@ -1,5 +1,6 @@
 import 'package:appdev_project/Screens/cart_screen.dart';
 import 'package:appdev_project/provider/food_provider.dart';
+import 'package:appdev_project/widgets/drawer_widget.dart';
 import 'package:appdev_project/widgets/food_grid_widget.dart';
 import 'package:appdev_project/widgets/food_item.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _FoodProductScreenState extends State<FoodProductScreen> {
     // final food_list = food_provider.foods;
     return Scaffold(
         backgroundColor: Colors.grey[200],
-        drawer: Drawer(),
+        drawer: DrawerWidget(),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100),
           child: AppBar(

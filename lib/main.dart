@@ -1,13 +1,26 @@
+import 'package:appdev_project/Screens/google_signin.dart';
 import 'package:appdev_project/home_screen.dart';
 import 'package:appdev_project/provider/ads_provider.dart';
 import 'package:appdev_project/provider/cart_provider.dart';
 import 'package:appdev_project/provider/food_provider.dart';
+import 'package:appdev_project/provider/gadgets_provider.dart';
+import 'package:appdev_project/provider/order_provider.dart';
 import 'package:appdev_project/provider/pets_provider.dart';
 import 'package:appdev_project/provider/vet_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyAV8wSBJoi7U7KEKzWltdo7Qc97LQm3TAg",
+      appId: "XXX",
+      messagingSenderId: "XXX",
+      projectId: "XXX",
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -24,6 +37,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => VetProvider()),
         ChangeNotifierProvider(create: (context) => PetsProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => OrderProvider()),
+        ChangeNotifierProvider(create: (context) => GadgetsProvider()),
+        ChangeNotifierProvider(create: (context) => GoogleSignInProvider())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
