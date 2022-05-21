@@ -10,7 +10,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart_listener = Provider.of<CartProvider>(context);
+    final cart_listener = Provider.of<CartProvider>(context, listen: false);
     return Container(
       color: Colors.grey[200],
       child: Column(

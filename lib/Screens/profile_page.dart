@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:appdev_project/Screens/Edit_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -87,6 +88,42 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
+                        builder: (context) => const EditProfile()),
+                  );
+                },
+                child: Row(
+                  children: const [
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: Text(
+                        "My Account",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(20),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  backgroundColor: Colors.deepPurple,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
                         builder: (context) => const ChangePassword()),
                   );
                 },
@@ -145,6 +182,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),
