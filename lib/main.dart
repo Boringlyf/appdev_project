@@ -25,11 +25,11 @@ Future main() async {
   Stripe.publishableKey =
       'pk_test_51L1rF0G96NCu7hWdpEdNElSMIXhvDhoFCm0qLhykoEMBU8x5ncuN4FU4Rt7XGBFySkdqIU4rvPj3LM9WlQayz5Rb00YcqqlVMU';
   await Stripe.instance.applySettings();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

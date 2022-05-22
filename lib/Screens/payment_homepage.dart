@@ -1,23 +1,35 @@
+// ignore_for_file: deprecated_member_use, avoid_print, duplicate_ignore, library_private_types_in_public_api, file_names
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-// ignore: camel_case_types
-class payment_Homescreen extends StatefulWidget {
-  const payment_Homescreen({Key? key}) : super(key: key);
+class PaymentScreen extends StatefulWidget {
+  final double? price;
+  const PaymentScreen({Key? key, required this.price}) : super(key: key);
 
   @override
-  _payment_HomescreenState createState() => _payment_HomescreenState();
+  _PaymentScreenState createState() => _PaymentScreenState();
 }
 
-class _payment_HomescreenState extends State<payment_Homescreen> {
+class _PaymentScreenState extends State<PaymentScreen> {
+  // int price = widget.price;
   Map<String, dynamic>? paymentIntentData;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Stripe Tutorial'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+          title: Text(
+            "Payment Page",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+          ),
+        ),
       ),
       body: Center(
         child: InkWell(
@@ -27,8 +39,8 @@ class _payment_HomescreenState extends State<payment_Homescreen> {
           child: Container(
             height: 50,
             width: 200,
-            color: Colors.green,
-            child: Center(
+            color: Colors.purple,
+            child: const Center(
               child: Text(
                 'Pay',
                 style: TextStyle(color: Colors.white, fontSize: 20),
@@ -43,7 +55,8 @@ class _payment_HomescreenState extends State<payment_Homescreen> {
   Future<void> makePayment() async {
     try {
       paymentIntentData =
-          await createPaymentIntent('20', 'USD'); //json.decode(response.body);
+          await createPaymentIntent(widget.price.toString(), 'USD');
+      //json.decode(response.body);
       // print('Response body==>${response.body.toString()}');
       await Stripe.instance
           .initPaymentSheet(
@@ -55,7 +68,7 @@ class _payment_HomescreenState extends State<payment_Homescreen> {
                   testEnv: true,
                   style: ThemeMode.dark,
                   merchantCountryCode: 'US',
-                  merchantDisplayName: 'ANNIE'))
+                  merchantDisplayName: 'PetStore'))
           .then((value) {});
 
       ///now finally display payment sheeet
@@ -75,14 +88,16 @@ class _payment_HomescreenState extends State<payment_Homescreen> {
         confirmPayment: true,
       ))
           .then((newValue) {
-        print('payment intent' + paymentIntentData!['id'].toString());
-        print(
-            'payment intent' + paymentIntentData!['client_secret'].toString());
-        print('payment intent' + paymentIntentData!['amount'].toString());
-        print('payment intent' + paymentIntentData.toString());
+        // ignore: avoid_print
+        print('payment intent${paymentIntentData!['id']}');
+        print('payment intent${paymentIntentData!['client_secret']}');
+        // ignore: avoid_print
+        print('payment intent${paymentIntentData!['amount']}');
+        // ignore: avoid_print
+        print('payment intent$paymentIntentData');
         //orderPlaceApi(paymentIntentData!['id'].toString());
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("paid successfully")));
+            .showSnackBar(const SnackBar(content: Text("paid successfully")));
 
         paymentIntentData = null;
       }).onError((error, stackTrace) {
@@ -92,7 +107,7 @@ class _payment_HomescreenState extends State<payment_Homescreen> {
       print('Exception/DISPLAYPAYMENTSHEET==> $e');
       showDialog(
           context: context,
-          builder: (_) => AlertDialog(
+          builder: (_) => const AlertDialog(
                 content: Text("Cancelled "),
               ));
     } catch (e) {
@@ -104,7 +119,7 @@ class _payment_HomescreenState extends State<payment_Homescreen> {
   createPaymentIntent(String amount, String currency) async {
     try {
       Map<String, dynamic> body = {
-        'amount': calculateAmount('20'),
+        'amount': calculateAmount(widget.price.toString()),
         'currency': currency,
         'payment_method_types[]': 'card'
       };
@@ -125,7 +140,11 @@ class _payment_HomescreenState extends State<payment_Homescreen> {
   }
 
   calculateAmount(String amount) {
-    final a = (int.parse(amount)) * 100;
-    return a.toString();
+    final a = (double.parse(amount) * 100);
+    int b = a.toInt();
+    print("value of a is $a");
+    print("value of b is $b");
+    // a = a * 100;
+    return b.toString();
   }
 }

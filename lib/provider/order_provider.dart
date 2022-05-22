@@ -29,6 +29,7 @@ class OrderProvider with ChangeNotifier {
             amount: total,
             products: cartProducts,
             dateTime: DateTime.now()));
+    print("Order Added");
     notifyListeners();
   }
 }

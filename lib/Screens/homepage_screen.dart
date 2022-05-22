@@ -13,13 +13,6 @@ class HomepageScreen extends StatelessWidget {
       child: SingleChildScrollView(
           child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              'Search Bar',
-              style: TextStyle(fontSize: 50),
-            ),
-          ),
           AdsWidget(),
           SizedBox(
             height: 10,

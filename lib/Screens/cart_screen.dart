@@ -5,13 +5,19 @@ import 'package:provider/provider.dart';
 
 import '../provider/cart_provider.dart';
 import '../widgets/cart_item_widget.dart';
+import './payment_homepage.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
+  // void addOrder() {
+  //   print('Order Added');
+  // }
+
   @override
   Widget build(BuildContext context) {
     final cart_listener = Provider.of<CartProvider>(context);
+    // final PaymentHomescreen payment = new PaymentHomescreen();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100),
@@ -51,12 +57,17 @@ class CartScreen extends StatelessWidget {
                     backgroundColor: Colors.white,
                   ),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         final order_listener =
                             Provider.of<OrderProvider>(context, listen: false);
                         order_listener.addOrder(
                             cart_listener.cartItems.values.toList(),
                             cart_listener.totalAmount);
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => PaymentScreen(
+                                  price: cart_listener.totalAmount)),
+                        );
                         cart_listener.clearCart();
                       },
                       child: Text(
@@ -78,7 +89,7 @@ class CartScreen extends StatelessWidget {
                   cart_listener.cartItems.keys.toList()[index],
                   cart_listener.cartItems.values.toList()[index].price,
                   cart_listener.cartItems.values.toList()[index].quantity,
-                  cart_listener.cartItems.values.toList()[index].id),
+                  cart_listener.cartItems.values.toList()[index].title),
             ),
           )
         ],

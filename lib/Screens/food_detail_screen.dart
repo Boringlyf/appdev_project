@@ -1,7 +1,10 @@
 import 'package:appdev_project/provider/food_provider.dart';
 import 'package:appdev_project/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/cart_provider.dart';
 
 class FoodDetailScreen extends StatelessWidget {
   final String id;
@@ -11,6 +14,7 @@ class FoodDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loaded_food =
         Provider.of<FoodProvider>(context, listen: false).findById(id);
+    final cart = Provider.of<CartProvider>(context, listen: false);
     return Scaffold(
       drawer: DrawerWidget(),
       appBar: PreferredSize(
@@ -60,6 +64,14 @@ class FoodDetailScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.purple,
+        child: Icon(Icons.add),
+        onPressed: () {
+          cart.addItem(loaded_food.id, loaded_food.name, loaded_food.price);
+          Fluttertoast.showToast(msg: 'Item added', fontSize: 15.0);
+        },
       ),
     );
   }

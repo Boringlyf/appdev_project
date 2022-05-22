@@ -1,7 +1,9 @@
 import 'package:appdev_project/provider/gadgets_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/cart_provider.dart';
 import '../widgets/drawer_widget.dart';
 
 class GadgetDetailScreen extends StatelessWidget {
@@ -12,6 +14,7 @@ class GadgetDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loaded_gadgets =
         Provider.of<GadgetsProvider>(context, listen: false).findById(id);
+    final cart = Provider.of<CartProvider>(context, listen: false);
     return Scaffold(
       drawer: DrawerWidget(),
       appBar: PreferredSize(
@@ -61,6 +64,15 @@ class GadgetDetailScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.purple,
+        child: Icon(Icons.add),
+        onPressed: () {
+          cart.addItem(
+              loaded_gadgets.id, loaded_gadgets.title, loaded_gadgets.price);
+          Fluttertoast.showToast(msg: 'Item added', fontSize: 15.0);
+        },
       ),
     );
   }

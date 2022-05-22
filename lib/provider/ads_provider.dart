@@ -1,4 +1,6 @@
 import 'package:appdev_project/models/ads_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 
 class AdsProvider with ChangeNotifier {
@@ -20,7 +22,14 @@ class AdsProvider with ChangeNotifier {
         imageUrl: 'https://i.ytimg.com/vi/kHAbdzMyZIM/maxresdefault.jpg')
   ];
 
+  final Stream<QuerySnapshot<Map<String, dynamic>>> adsStream =
+      FirebaseFirestore.instance.collection('ads').snapshots();
+
   List<AdsModel> get ads {
     return [..._ads];
+  }
+
+  Future getAds() async {
+    // final uid = AuthService()
   }
 }
