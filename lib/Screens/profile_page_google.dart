@@ -21,8 +21,17 @@ class _ProfilePage2State extends State<ProfilePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Profile"),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+          title: Text(
+            "Profile",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

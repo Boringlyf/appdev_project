@@ -37,8 +37,17 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Profile"),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100),
+        child: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+          title: Text(
+            "Profile",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -83,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.purple,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -119,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.purple,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -155,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.purple,
                 ),
                 onPressed: () {
                   FirebaseAuth.instance.signOut().then((value) {
@@ -194,7 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.purple,
                 ),
                 onPressed: () {
                   Navigator.push(

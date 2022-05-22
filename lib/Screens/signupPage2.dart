@@ -75,7 +75,7 @@ class _SignupPage2State extends State<SignupPage2> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Field can't be empty";
+                        return "Please Enter Your First Name";
                       }
                       return null;
                     },
@@ -101,7 +101,7 @@ class _SignupPage2State extends State<SignupPage2> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Field can't be empty";
+                        return "Please Enter Your Last Name";
                       }
                       return null;
                     },
@@ -127,7 +127,7 @@ class _SignupPage2State extends State<SignupPage2> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Field can't be empty";
+                        return "Please Enter Your Phone No";
                       }
                       return null;
                     },
@@ -153,7 +153,7 @@ class _SignupPage2State extends State<SignupPage2> {
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Field can't be empty";
+                        return "Please Enter Your Address";
                       }
                       return null;
                     },
@@ -167,7 +167,9 @@ class _SignupPage2State extends State<SignupPage2> {
                   width: 200,
                   child: ElevatedButton(
                     onPressed: () {
-                      signUp();
+                      if (_formkey.currentState!.validate()) {
+                        signUp();
+                      }
                     },
                     child: const Text('Register'),
                   ),
@@ -232,7 +234,7 @@ class _SignupPage2State extends State<SignupPage2> {
 
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const ProfilePage()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
         (route) => false);
   }
 }

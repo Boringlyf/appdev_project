@@ -37,8 +37,19 @@ class _LoginPageState extends State<LoginPage> {
     return Form(
       key: _formkey,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Login"),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100),
+          child: AppBar(
+            centerTitle: true,
+            backgroundColor: Colors.purple,
+            title: Text(
+              "Login",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 30),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Center(

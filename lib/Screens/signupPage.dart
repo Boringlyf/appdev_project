@@ -28,8 +28,19 @@ class _SignupPageState extends State<SignupPage> {
     return Form(
       key: _formkey,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Signup"),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100),
+          child: AppBar(
+            centerTitle: true,
+            backgroundColor: Colors.purple,
+            title: Text(
+              "SignUp",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 30),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -130,9 +141,6 @@ class _SignupPageState extends State<SignupPage> {
                       RegExp regex = new RegExp(r'^.{6,}$');
                       if (value!.isEmpty) {
                         return "Please Confirm Your Password";
-                      }
-                      if (!regex.hasMatch(value)) {
-                        return "Please Enter Valid Password(Min. 6 Character";
                       }
 
                       if (password_controller.text !=

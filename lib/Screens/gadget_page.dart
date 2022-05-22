@@ -75,7 +75,7 @@ class _GadgetsPageState extends State<GadgetsPage> {
           centerTitle: true,
           backgroundColor: Colors.purple,
           title: Text(
-            "Pet Food",
+            "Pet Gadgets",
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
           ),
